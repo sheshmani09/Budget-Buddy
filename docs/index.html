@@ -5,8 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Budget Buddy - Your Perosnal Finance Tracker</title>
     <link href="./output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
   </head>
   <body>
+    <!-- navbar -->
+    <nav>
+      <div class="flex bg-gray-100 text-gray-900 dark:text-gray-200 dark:bg-gray-900">
+        <div class="logo flex">
+          <i class="fa-solid fa-wallet text-2xl"></i>
+          <h1 class="text-2xl"><span class="">Budget</span>Buddy</h1>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-label">Theme</span>
+            <i id="theme-icon" class="fa-regular fa-sun"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- summary-cards  -->
+    <section id="summary-cards">
+      <div id="income-card">
+        <h3>Income</h3>
+        <p>
+          <i class="fa-solid fa-indian-rupee-sign"></i>
+          <span id="income-amount">0.00</span>
+        </p>
+      </div>
+      <div id="expenses-card">
+        <h3>Expenses</h3>
+        <p>₹ <span id="expense-amount">0.00</span></p>
+      </div>
+      <div id="balance-card">
+        <h3>Balance</h3>
+        <p>₹ <span id="balance-amount">0.00</span></p>
+      </div>
+    </section>
+
+    <!-- main-section for transaction adding  -->
+    <main>
+      <div id="left">
+        <h2>Add Transaction</h2>
+        <form>
+          <!-- type-selector -->
+          <fieldset>
+            <legend>Type</legend>
+            <button type="button" id="income-btn" data-type="income">
+              Income
+            </button>
+            <button type="button" id="expense-btn" data-type="expense">
+              Expense
+            </button>
+          </fieldset>
+          <!-- description adder -->
+          <label for="desc">Description</label>
+          <input
+            type="text"
+            id="desc"
+            name="desc"
+            placeholder="Salary, Rent etc..."
+          />
+          <!-- amount adder -->
+          <label for="amount">Amount(₹)</label>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            placeholder="500"
+            required
+          />
+          <!-- date-section  -->
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" />
+          <!-- category dropdown -->
+          <label for="category-selector">Category</label>
+          <select id="category-selector" name="category" required></select>
+          <!-- submit button  -->
+          <button type="submit" id="btn-submit">+ Add Transaction</button>
+        </form>
+      </div>
+
+      <div id="right">
+        <div>
+          <h2>Transactions</h2>
+          <select name="transaction-filter" id="transaction-filter">
+            <option value="All Transaction" id="all" selected>
+              All Transaction
+            </option>
+            <option value="Incomes" id="incomes">Incomes</option>
+            <option value="Expenses" id="expenses">Expenses</option>
+          </select>
+        </div>
+      </div>
+    </main>
+
+    <!-- history section in short -->
+    <section id="overview">
+      <h2>Monthly Overview</h2>
+      <div id="expense-categories">
+        <h2>Expense Categories</h2>
+        <p class="placeholder">No expenses added yet</p>
+      </div>
+      <div id="recent-transaction">
+        <h2>Recent Transactions</h2>
+        <p class="placeholder">No recents transactions</p>
+      </div>
+    </section>
     <script src="./script.js"></script>
   </body>
 </html>
