@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Budget Buddy - Your Perosnal Finance Tracker</title>
+    <title>Budget Buddy</title>
     <link href="./output.css" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -11,110 +11,176 @@
     />
   </head>
   <body>
-    <!-- navbar -->
-    <nav>
-      <div class="flex bg-gray-100 text-gray-900 dark:text-gray-200 dark:bg-gray-900">
-        <div class="logo flex">
-          <i class="fa-solid fa-wallet text-2xl"></i>
-          <h1 class="text-2xl"><span class="">Budget</span>Buddy</h1>
-        </div>
-        <div class="theme-toggle">
-          <button id="theme-toggle" aria-label="Toggle theme">
-            <span class="theme-label">Theme</span>
-            <i id="theme-icon" class="fa-regular fa-sun"></i>
-          </button>
-        </div>
-      </div>
-    </nav>
+    <div class="mx-auto max-w-3xl min-h-screen">
+      <!-- navbar -->
 
-    <!-- summary-cards  -->
-    <section id="summary-cards">
-      <div id="income-card">
-        <h3>Income</h3>
-        <p>
-          <i class="fa-solid fa-indian-rupee-sign"></i>
-          <span id="income-amount">0.00</span>
-        </p>
-      </div>
-      <div id="expenses-card">
-        <h3>Expenses</h3>
-        <p>₹ <span id="expense-amount">0.00</span></p>
-      </div>
-      <div id="balance-card">
-        <h3>Balance</h3>
-        <p>₹ <span id="balance-amount">0.00</span></p>
-      </div>
-    </section>
+      <nav class="flex justify-between min-w-full h-16 items-center px-3 my-5">
+        <div class="flex flex-col items-center ">
+          <div class="logo flex"><i class="fa-solid fa-wallet text-2xl mt-2 text-red-900 mx-2"></i>
+          <h1 class="text-3xl font-bold text-red-900">
+            <span class="">Budget</span>Buddy
+          </h1></div>
+          <p class="text-red-900">Your Perosnal Finance Tracker</p>
+        </div>
+        <div class="theme-toggle text-2xl flex flex-row">
+          <span class="hidden sm:block font-semibold">Theme</span>
+          <button id="theme-toggle" aria-label="Toggle theme">☀</button>
+        </div>
+      </nav>
 
-    <!-- main-section for transaction adding  -->
-    <main>
-      <div id="left">
-        <h2>Add Transaction</h2>
-        <form>
-          <!-- type-selector -->
-          <fieldset>
-            <legend>Type</legend>
-            <button type="button" id="income-btn" data-type="income">
-              Income
+      <!-- summary-cards  -->
+      <section
+        id="summary-cards"
+        class="flex flex-col items-center  sm:flex-row sm:justify-between md:mx-5 my-5"
+      >
+        <div
+          id="income-card"
+          class="bg-green-200 border-l-6 border-green-700 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
+        >
+          <h3>Income</h3>
+          <p class="text-xl">₹ <span id="income-amount">0.00</span></p>
+        </div>
+        <div
+          id="expenses-card"
+          class="bg-red-200 border-l-6 border-red-600 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
+        >
+          <h3>Expenses</h3>
+          <p class="text-xl">₹ <span id="expense-amount">0.00</span></p>
+        </div>
+        <div
+          id="balance-card"
+          class="bg-orange-200 border-l-6 border-orange-500 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
+        >
+          <h3>Balance</h3>
+          <p class="text-xl">₹ <span id="balance-amount">0.00</span></p>
+        </div>
+      </section>
+
+      <!-- main-section for transaction adding  -->
+      <main class="flex flex-col md:mx-5 sm:flex-row w-full gap-4 my-5">
+        <div
+          id="left"
+          class="w-72 sm:w-64 mx-auto pl-4 sm:ml-6 shadow shadow-slate-500 rounded-lg p-3"
+        >
+          <h2 class="font-bold text-xl">Add Transaction</h2>
+          <form class="flex flex-col gap-2 sm:gap-3 font-medium">
+            <!-- type-selector -->
+            <fieldset class="flex flex-col gap-3">
+              <legend class="font-medium">Type</legend>
+
+              <div
+                class="flex rounded-md border-2 border-slate-400 font-semibold"
+              >
+                <button
+                  type="button"
+                  id="income-btn"
+                  data-type="income"
+                  class="flex-1 px-4 py-2 border-r-2 border-slate-400"
+                >
+                  Income
+                </button>
+
+                <button
+                  type="button"
+                  id="expense-btn"
+                  data-type="expense"
+                  class="flex-1 px-4 py-2"
+                >
+                  Expense
+                </button>
+              </div>
+            </fieldset>
+
+            <!-- description adder -->
+            <label for="desc">Description</label>
+            <input
+              type="text"
+              id="desc"
+              name="desc"
+              placeholder="Salary, Rent etc..."
+              class="border-2 border-slate-400 rounded-md h-10 p-3"
+            />
+            <!-- amount adder -->
+            <label for="amount">Amount(₹)</label>
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              placeholder="500"
+              class="border-2 border-gray-400 rounded-md h-10 p-3"
+              required
+            />
+            <!-- date-section  -->
+            <label for="date">Date</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              class="border-2 border-slate-400 text-slate-500 rounded-md h-10 p-3"
+            />
+            <!-- category dropdown -->
+            <label for="category-selector">Category</label>
+            <select
+              id="category-selector"
+              name="category"
+              required
+              class="border-2 border-slate-400 rounded-md h-10 p-3"
+            ></select>
+            <!-- submit button  -->
+            <button
+              type="submit"
+              id="btn-submit"
+              class="bg-orange-600 text-slate-200 text-xl h-12 rounded-lg"
+            >
+              + Add Transaction
             </button>
-            <button type="button" id="expense-btn" data-type="expense">
-              Expense
-            </button>
-          </fieldset>
-          <!-- description adder -->
-          <label for="desc">Description</label>
-          <input
-            type="text"
-            id="desc"
-            name="desc"
-            placeholder="Salary, Rent etc..."
-          />
-          <!-- amount adder -->
-          <label for="amount">Amount(₹)</label>
-          <input
-            type="number"
-            name="amount"
-            id="amount"
-            placeholder="500"
-            required
-          />
-          <!-- date-section  -->
-          <label for="date">Date</label>
-          <input type="date" id="date" name="date" />
-          <!-- category dropdown -->
-          <label for="category-selector">Category</label>
-          <select id="category-selector" name="category" required></select>
-          <!-- submit button  -->
-          <button type="submit" id="btn-submit">+ Add Transaction</button>
-        </form>
-      </div>
-
-      <div id="right">
-        <div>
-          <h2>Transactions</h2>
-          <select name="transaction-filter" id="transaction-filter">
-            <option value="All Transaction" id="all" selected>
-              All Transaction
-            </option>
-            <option value="Incomes" id="incomes">Incomes</option>
-            <option value="Expenses" id="expenses">Expenses</option>
-          </select>
+          </form>
         </div>
-      </div>
-    </main>
 
-    <!-- history section in short -->
-    <section id="overview">
-      <h2>Monthly Overview</h2>
-      <div id="expense-categories">
-        <h2>Expense Categories</h2>
-        <p class="placeholder">No expenses added yet</p>
-      </div>
-      <div id="recent-transaction">
-        <h2>Recent Transactions</h2>
-        <p class="placeholder">No recents transactions</p>
-      </div>
-    </section>
+        <div
+          id="right"
+          class="w-[90%] sm:w-4/6 min-h-72  sm:h-auto  mx-5 md:ml-5 md:mr-2  shadow shadow-slate-500 rounded-lg"
+        >
+          <div class="flex justify-between mx-5 my-3">
+            <h2 class="text-xl font-bold">Transactions</h2>
+            <select
+              name="transaction-filter"
+              id="transaction-filter"
+              class="border-2 border-slate-800 rounded-md p-1"
+            >
+              <option value="All Transactions" id="all" selected>
+                All Transactions
+              </option>
+              <option value="Incomes" id="incomes">Incomes</option>
+              <option value="Expenses" id="expenses">Expenses</option>
+            </select>
+          </div>
+          <div id="recent-transactions">
+            <p class="text-slate-500 text-center mt-20">
+              No transactions found
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <!-- history section in short -->
+      <section
+        id="overview"
+        class="mx-6  my-5 p-3 shadow md:mx-0 shadow-slate-500 rounded-lg"
+      >
+        <h2 class="font-bold text-lg">Monthly Overview</h2>
+        <div class="flex">
+          <div id="expense-categories" class="w-1/2">
+            <h2>Expense Categories</h2>
+            <p class="placeholder">No expenses added yet</p>
+          </div>
+          <div id="recent-transaction" class="w-1/2">
+            <h2>Recent Transactions</h2>
+            <p class="placeholder">No recents transactions</p>
+          </div>
+        </div>
+      </section>
+    </div>
     <script src="./script.js"></script>
   </body>
 </html>
