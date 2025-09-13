@@ -11,7 +11,7 @@
     />
   </head>
   <body>
-    <div class="mx-auto max-w-3xl min-h-screen">
+    <div class="mx-auto max-w-3xl min-h-screen border-2">
       <!-- navbar -->
 
       <nav class="flex justify-between min-w-full h-16 items-center px-3 my-5">
@@ -31,7 +31,7 @@
       <!-- summary-cards  -->
       <section
         id="summary-cards"
-        class="flex flex-col items-center  sm:flex-row sm:justify-between md:mx-5 my-5"
+        class="max-w-full mx-auto flex flex-col sm:flex-row flex-wrap gap-5 justify-center items-center px-5"
       >
         <div
           id="income-card"
@@ -57,10 +57,10 @@
       </section>
 
       <!-- main-section for transaction adding  -->
-      <main class="flex flex-col md:mx-5 sm:flex-row w-full gap-4 my-5">
+      <main class="flex flex-col sm:flex-row justify-center items-center sm:items-stretch gap-4 px-5 mt-10 ">
         <div
           id="left"
-          class="w-72 sm:w-64 mx-auto pl-4 sm:ml-6 shadow shadow-slate-500 rounded-lg p-3"
+          class="w-72 sm:w-64 p-3 shadow shadow-slate-500 rounded-lg"
         >
           <h2 class="font-bold text-xl">Add Transaction</h2>
           <form class="flex flex-col gap-2 sm:gap-3 font-medium">
@@ -139,10 +139,10 @@
 
         <div
           id="right"
-          class="w-[90%] sm:w-4/6 min-h-72  sm:h-auto  mx-5 md:ml-5 md:mr-2  shadow shadow-slate-500 rounded-lg"
+          class="w-5/6 sm:flex-1 shadow shadow-slate-500 rounded-lg"
         >
           <div class="flex justify-between mx-5 my-3">
-            <h2 class="text-xl font-bold">Transactions</h2>
+            <h2 class="sm:text-xl font-bold">Transactions</h2>
             <select
               name="transaction-filter"
               id="transaction-filter"
