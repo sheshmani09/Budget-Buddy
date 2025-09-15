@@ -10,18 +10,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
   </head>
-  <body class="text-slate-900 bg-slate-200 dark:text-slate-200 dark:bg-slate-900">
-    <div class="mx-auto max-w-3xl min-h-screen
-    dark:bg-slate-900">
+  <body 
+    class="text-slate-900 bg-slate-200 dark:text-slate-200 dark:bg-slate-900
+    "
+  >
+    <div class="mx-auto max-w-3xl min-h-screen dark:bg-slate-900">
       <!-- navbar -->
 
       <nav class="flex justify-between min-w-full h-16 items-center px-3 my-5">
         <div class="flex flex-col items-center text-orange-600">
           <div class="logo flex">
             <i class="fa-solid fa-wallet text-2xl mt-2 mx-2"></i>
-            <h1 class="text-3xl font-bold">
-              BudgetBuddy
-            </h1>
+            <h1 class="text-3xl font-bold">BudgetBuddy</h1>
           </div>
           <p>Your Perosnal Finance Tracker</p>
         </div>
@@ -34,25 +34,25 @@
       <!-- summary-cards  -->
       <section
         id="summary-cards"
-        class="max-w-full mx-auto flex flex-col sm:flex-row flex-wrap gap-5 justify-center items-center px-5 dark:text-slate-900 "
+        class="max-w-full mx-auto flex flex-col sm:flex-row flex-wrap gap-5 justify-center items-center px-5 dark:text-slate-900"
       >
         <div
           id="income-card"
-          class="bg-green-200 dark:bg-green-400 border-l-6 border-green-700 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
+          class="bg-green-300 dark:bg-green-400 border-l-6 border-green-700 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
         >
           <h3>Income</h3>
           <p class="text-xl">₹ <span id="income-amount">0.00</span></p>
         </div>
         <div
           id="expenses-card"
-          class="bg-red-200 dark:bg-red-400 border-l-6 border-red-600 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
+          class="bg-red-300 dark:bg-red-400 border-l-6 border-red-600 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
         >
           <h3>Expenses</h3>
           <p class="text-xl">₹ <span id="expense-amount">0.00</span></p>
         </div>
         <div
           id="balance-card"
-          class="bg-orange-200 dark:bg-orange-400 border-l-6 border-orange-500 dark:border-orange-700  h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
+          class="bg-orange-300 dark:bg-orange-400 border-l-6 border-orange-500 dark:border-orange-700 h-24 w-52 rounded-2xl font-bold my-4 flex flex-col items-center justify-center shadow-md shadow-slate-500"
         >
           <h3>Balance</h3>
           <p class="text-xl">₹ <span id="balance-amount">0.00</span></p>
@@ -96,15 +96,15 @@
               </div>
             </fieldset>
 
-            <!-- description adder -->
-            <label for="desc">Description</label>
-            <input
-              type="text"
-              id="desc"
-              name="desc"
-              placeholder="Salary, Rent etc..."
-              class="border-2 border-slate-400 rounded-md h-10 p-3"
-            />
+            <!-- category dropdown -->
+            <label for="category-selector">Category</label>
+            <select
+              id="category-selector"
+              name="category"
+              required
+              class="border-2 border-slate-400 rounded-md px-3 py-2 dark:text-slate-200 dark:bg-slate-900"
+            ></select>
+
             <!-- amount adder -->
             <label for="amount">Amount(₹)</label>
             <input
@@ -112,7 +112,8 @@
               name="amount"
               id="amount"
               placeholder="500"
-              class="border-2 border-gray-400 rounded-md h-10 p-3"
+              min="1"
+              class="border-2 border-gray-400 rounded-md h-10 p-3 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield]"
               required
             />
             <!-- date-section  -->
@@ -121,16 +122,19 @@
               type="date"
               id="date"
               name="date"
-              class="border-2 border-slate-400 text-slate-900 dark:text-slate-200  rounded-md h-10 p-3"
+              class="border-2 border-slate-400 text-slate-900 dark:text-slate-200 dark:scheme-dark rounded-md h-10 p-3"
             />
-            <!-- category dropdown -->
-            <label for="category-selector">Category</label>
-            <select
-              id="category-selector"
-              name="category"
-              required
-              class="border-2 border-slate-400 rounded-md h-10 p-3 dark:text-slate-200 dark:bg-slate-900 "
-            ></select>
+
+            <!-- description adder -->
+            <label for="desc">Description</label>
+            <input
+              type="text"
+              id="desc"
+              name="desc"
+              placeholder="Salary, Rent etc..."
+              autocomplete="off"
+              class="border-2 border-slate-400 rounded-md h-10 p-3"
+            />
             <!-- submit button  -->
             <button
               type="submit"
@@ -144,7 +148,7 @@
 
         <div
           id="right"
-          class="w-5/6 sm:flex-1 shadow shadow-slate-500 rounded-lg dark:shadow-md"
+          class="w-5/6 sm:flex-1 flex flex-col shadow shadow-slate-500 rounded-lg dark:shadow-md"
         >
           <div class="flex justify-between mx-5 my-3">
             <h2 class="sm:text-xl font-bold">Transactions</h2>
@@ -160,10 +164,16 @@
               <option value="Expenses" id="expenses">Expenses</option>
             </select>
           </div>
-          <div class="min-h-56 flex-1 overflow-y-auto px-4">
-           <div id="transaction-list">
-            <p class="text-center text-slate-500 pt-12 sm:pt-20">No transaction yet.</p>
-           </div>
+          <div class="pl-3 sm:pl-0 sm:pr-2">
+            <div
+              class="min-h-56 max-h-[50vh] sm:max-h-[65vh] flex-1 px-4 overflow-y-auto [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-thumb]:rounded-3xl [&::-webkit-scrollbar-thumb]:bg-slate-400 dark:[&::-webkit-scrollbar-thumb]:bg-slate-600 [&::-webkit-scrollbar]:hidden sm:[&::-webkit-scrollbar]:block scroll-smooth"
+            >
+              <div id="transaction-list">
+                <p class="text-center text-slate-500 pt-12 sm:pt-20">
+                  No transaction yet.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </main>
