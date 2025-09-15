@@ -34,7 +34,7 @@ themeBtn.addEventListener("click", () => {
   if (bodyEl.classList.contains("dark")) {
     bodyEl.classList.remove("dark");
     localStorage.setItem("theme", "light");
-    themeBtn.textContent = "☀";
+    themeBtn.textContent = "🌞";
   } else {
     bodyEl.classList.add("dark");
     localStorage.setItem("theme", "dark");
