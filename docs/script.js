@@ -144,7 +144,7 @@ function renderTransactions() {
   filteredTx.forEach((tx) => {
     const item = document.createElement("div");
     item.className =
-      "flex justify-between items-center bg-slate-300 dark:bg-slate-800 px-3 py-2 my-2 rounded-lg shadow-md hover:shadow-md hover:scale-103 transition-all";
+      "flex justify-between items-center bg-slate-200 dark:bg-slate-800 px-3 py-2 my-2 rounded-lg shadow-md hover:shadow-lg hover:scale-103 transition-all";
 
     item.innerHTML = `
       <div>
@@ -281,24 +281,28 @@ function renderOverview(items, container, colorsMap) {
     total += tx.amount;
   });
 
+  const sortedGroups = Object.entries(groups).sort((a, b) => b[1] - a[1]);
+
   let html = "";
-  for (const [cat, amt] of Object.entries(groups)) {
+  for (const [cat, amt] of sortedGroups) {
     const percent = ((amt / total) * 100).toFixed(1);
     const iconClass = categoryIcons[cat] || "fa-circle";
     const colorClass = colorsMap[cat] || "bg-gray-500 text-gray-600";
 
-    html += `<div class="bg-slate-200 dark:bg-slate-800 p-3 rounded-lg shadow">
+    const [bgClass, textClass] = colorClass.split(" ");
+
+    html += `<div class="bg-slate-200 dark:bg-slate-800 p-3 rounded-lg shadow-lg hover:scale-103 transition-all">
       <div class="flex justify-between items-center text-sm font-medium mb-1">
         <div class="flex items-center gap-2">
-          <i class="fa-solid ${iconClass} ${colorClass.split(" ")[1]}"></i>
+          <i class="fa-solid ${iconClass} ${textClass}"></i> 
           <span>${cat}</span>
         </div>
-        <span>${percent}%</span>
+        <span>${percent}% • ₹${amt.toFixed(
+      2
+    )}</span> <!-- 🔹 changed (added amount display) -->
       </div>
       <div class="w-full bg-slate-300 dark:bg-slate-700 h-2 rounded">
-        <div class="${
-          colorClass.split(" ")[0]
-        } h-2 rounded" style="width:${percent}%"></div>
+        <div class="${bgClass} h-2 rounded" style="width:${percent}%"></div> 
       </div>
     </div>`;
   }
