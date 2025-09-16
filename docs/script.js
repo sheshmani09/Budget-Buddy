@@ -6,6 +6,7 @@ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 document.addEventListener("DOMContentLoaded", () => {
   updateSummary();
   renderTransactions();
+  showOverview();
 });
 
 // getting elements
@@ -91,7 +92,7 @@ form.addEventListener("submit", (e) => {
   const transaction = {
     id: Date.now(), //to give unique id to transactions
     type: transactionType,
-    description: desc.value.trim(),
+    description: desc.value.trim() || categorySelector.value,
     amount: parseFloat(amount.value),
     date: date.value || new Date().toISOString().split("T")[0],
     category: categorySelector.value,
@@ -101,6 +102,7 @@ form.addEventListener("submit", (e) => {
 
   updateSummary(); //updates summary
   renderTransactions();
+  showOverview();
 
   form.reset();
 
@@ -142,7 +144,7 @@ function renderTransactions() {
   filteredTx.forEach((tx) => {
     const item = document.createElement("div");
     item.className =
-      "flex justify-between items-center bg-slate-300 dark:bg-slate-800 px-3 py-2 my-2 rounded-lg shadow-md hover:shadow-md hover:scale-105 transition-shadow";
+      "flex justify-between items-center bg-slate-300 dark:bg-slate-800 px-3 py-2 my-2 rounded-lg shadow-md hover:shadow-md hover:scale-103 transition-all";
 
     item.innerHTML = `
       <div>
@@ -191,11 +193,12 @@ function dateToIN(isoDate) {
 // transaction delete
 
 function deleteTx(id) {
-  transactions = transactions.filter((t) => t.id != id);
+  transactions = transactions.filter((t) => t.id !== id);
   localStorage.setItem("transactions", JSON.stringify(transactions));
 
   updateSummary();
   renderTransactions();
+  showOverview();
 }
 
 // filter transactions
@@ -210,4 +213,95 @@ function txFilter() {
   } else {
     return transactions;
   }
+}
+
+// overview section
+
+const categoryIcons = {
+  Food: "fa-utensils",
+  Rent: "fa-house",
+  Grocery: "fa-basket-shopping",
+  Shopping: "fa-cart-shopping",
+  Health: "fa-heart-pulse",
+  Transport: "fa-car",
+  Entertainment: "fa-photo-film",
+  Education: "fa-book",
+  Salary: "fa-money-bill-wave",
+  Bonus: "fa-gift",
+  Allowance: "fa-wallet",
+  Investment: "fa-chart-line",
+  Cash: "fa-coins",
+  Other: "fa-circle-question",
+};
+
+const expenseColors = {
+  Food: "bg-orange-500 text-orange-600",
+  Rent: "bg-purple-500 text-purple-600",
+  Grocery: "bg-green-500 text-green-600",
+  Shopping: "bg-pink-500 text-pink-600",
+  Health: "bg-red-500 text-red-600",
+  Transport: "bg-blue-500 text-blue-600",
+  Entertainment: "bg-yellow-500 text-yellow-600",
+  Education: "bg-indigo-500 text-indigo-600",
+  Other: "bg-gray-500 text-gray-600",
+};
+const incomeColors = {
+  Salary: "bg-green-500 text-green-600",
+  Bonus: "bg-blue-500 text-blue-600",
+  Allowance: "bg-purple-500 text-purple-600",
+  Investment: "bg-teal-500 text-teal-600",
+  Cash: "bg-yellow-500 text-yellow-600",
+  Other: "bg-gray-500 text-gray-600",
+};
+
+function showOverview() {
+  renderOverview(
+    transactions.filter((t) => t.type === "income"),
+    document.getElementById("income-overview"),
+    incomeColors
+  );
+  renderOverview(
+    transactions.filter((t) => t.type === "expense"),
+    document.getElementById("expense-overview"),
+    expenseColors
+  );
+}
+
+function renderOverview(items, container, colorsMap) {
+  if (items.length === 0) {
+    container.innerHTML = `<p class="placeholder text-center text-slate-500">No Data Available!</p>`;
+    return;
+  }
+
+  const groups = {};
+  let total = 0;
+
+  items.forEach((tx) => {
+    groups[tx.category] = (groups[tx.category] || 0) + tx.amount;
+    total += tx.amount;
+  });
+
+  let html = "";
+  for (const [cat, amt] of Object.entries(groups)) {
+    const percent = ((amt / total) * 100).toFixed(1);
+    const iconClass = categoryIcons[cat] || "fa-circle";
+    const colorClass = colorsMap[cat] || "bg-gray-500 text-gray-600";
+
+    html += `<div class="bg-slate-200 dark:bg-slate-800 p-3 rounded-lg shadow">
+      <div class="flex justify-between items-center text-sm font-medium mb-1">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid ${iconClass} ${colorClass.split(" ")[1]}"></i>
+          <span>${cat}</span>
+        </div>
+        <span>${percent}%</span>
+      </div>
+      <div class="w-full bg-slate-300 dark:bg-slate-700 h-2 rounded">
+        <div class="${
+          colorClass.split(" ")[0]
+        } h-2 rounded" style="width:${percent}%"></div>
+      </div>
+    </div>`;
+  }
+
+  container.innerHTML = html;
 }
